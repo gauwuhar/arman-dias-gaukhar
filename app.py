@@ -12,12 +12,13 @@ def index():
 
 @app.route('/interactive_guide', methods=['GET', 'POST'])
 def interactive_guide():
+    chat_response = None
     if request.method == 'POST':
         user_message = {
             'user_message': request.form['input_field'],
         }
-        get_user_input(user_message)
-    return render_template('interactive_guide.html')
+        chat_response = get_user_input(user_message)
+    return render_template('interactive_guide.html', chat_response=chat_response)
 
 
 def get_user_input(user_message):
@@ -26,7 +27,7 @@ def get_user_input(user_message):
     response = model.generate_content('Привет' + str(user_message))
     chat_response = response.text
     print(chat_response)
-    return render_template('interactive_guide.html', text=chat_response)
+    return chat_response
 
 if __name__ == '__main__':
     app.run(debug=True)
