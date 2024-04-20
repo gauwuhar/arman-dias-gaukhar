@@ -204,6 +204,24 @@
     display: flex;
     align-items: center;
   }
+  .chat-container {
+    max-height: 400px;
+    overflow-y: scroll;
+  }
+
+  .message {
+    margin-bottom: 10px;
+  }
+
+  .user .sender {
+    font-weight: bold;
+    color: blue;
+  }
+
+  .assistant .sender {
+    font-weight: bold;
+    color: green;
+  }
 </style>
 <body class="home-page">
 
@@ -827,12 +845,19 @@
 
 
 <div class="main_chat_form">
-<form method="POST" action="{{ url_for('interactive_guide') }}">
-  <input type="text" name="input_field" style="height:200px;width:500px;font-size:14pt;">
-  <textarea type="text" name="output_field" style="height:200px;width:500px;font-size:14pt;">{{ chat_response }}</textarea>
-  <div class=e336_746 id="otpravit"><span  class="e336_747"><input type="submit" value="Отправить"></span></div>
-</form>
+  <div class="chat-container">
+    {% for message in chat_history %}
+    <div class="message {{ message[0] }}">
+      <span class="sender">{{ message[0] }}</span>
+      <span class="content">{{ message[1] }}</span>
+    </div>
+    {% endfor %}
+  </div>
 
+  <form method="POST" action="/interactive_guide">
+    <input type="text" name="input_field">
+    <button type="submit">Отправить</button>
+  </form>
 </div>
 
 

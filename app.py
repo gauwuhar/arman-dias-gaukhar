@@ -3,29 +3,28 @@ import google.generativeai as genai
 
 app = Flask(__name__)
 
+chat_history = []
+
 @app.route('/')
 def index():
-    return render_template('index.html')
-
-
+    return render_template('index.html', chat_history=chat_history)
 
 @app.route('/interactive_guide', methods=['GET', 'POST'])
 def interactive_guide():
-    chat_response = "Здравствуйте! Чем могу помочь?"
     if request.method == 'POST':
-        user_message = {
-            'user_message': request.form['input_field'],
-        }
-        chat_response = get_user_input(user_message)
-    return render_template('interactive_guide.html', chat_response=chat_response)
+        user_message = request.form['input_field']
+        chat_history.append(('user', user_message))
+        chat_response = get_chat_response(user_message)
+        chat_history.append(('assistant', chat_response))
+    else:
+        chat_response = "Здравствуйте! Чем могу помочь?"
+    return render_template('interactive_guide.html', chat_history=chat_history)
 
-
-def get_user_input(user_message):
-    genai.configure(api_key='AIzaSyCqfehAC7iwbfBc8jnMRgSt8OIa2Z02kpo')
+def get_chat_response(user_message):
+    genai.configure(api_key='AIzaSyCqfehAC7iwbfBc8jnMRgSt8OIa2Z02kpo')  # Замените YOUR_API_KEY на свой ключ API
     model = genai.GenerativeModel('gemini-pro')
-    response = model.generate_content('Привет' + str(user_message))
+    response = model.generate_content('Привет ' + user_message)
     chat_response = response.text
-    print(chat_response)
     return chat_response
 
 if __name__ == '__main__':
