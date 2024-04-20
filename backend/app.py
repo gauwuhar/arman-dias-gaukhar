@@ -2,10 +2,11 @@ from flask import Flask, request, jsonify
 from pymongo import MongoClient
 from google.cloud import dialogflow_v2 as dialogflow
 import os
-
+from flask_cors import CORS
 
 # Initialize Flask app
 app = Flask(__name__)
+CORS(app)
 
 # Configure the database client and connect to MongoDB
 client = MongoClient('mongodb://localhost:27017/')
@@ -44,6 +45,19 @@ def handle_message():
 
     # Respond with Dialogflow's fulfillment text
     return jsonify({'message': response.fulfillment_text})
+
+@app.route('/send_message', methods=['POST'])
+def send_message():
+    user_message = request.json['message']
+    # Process the message with Dialogflow or your NLP model
+    response_message = process_message(user_message)
+    return jsonify({'message': response_message})
+
+def process_message(message):
+    # This function would handle talking to Dialogflow or another service
+    # and generating a response based on the user's message.
+    # Replace this with your actual logic to get a response.
+    return "Response from your chatbot"
 
 @app.route('/api/dialogflow', methods=['POST'])
 def dialogflow_route():
