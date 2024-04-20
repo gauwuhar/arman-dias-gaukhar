@@ -25,6 +25,8 @@ def get_user_input(user_message):
     model = genai.GenerativeModel('gemini-pro')
     response = model.generate_content('Привет' + str(user_message))
     chat_response = response.text
+    print(chat_response)
+    return render_template('interactive_guide.html', text=chat_response)
 
 if __name__ == '__main__':
     app.run(debug=True)
