@@ -23,7 +23,7 @@ def interactive_guide():
 def get_chat_response(user_message):
     genai.configure(api_key='AIzaSyCqfehAC7iwbfBc8jnMRgSt8OIa2Z02kpo')  # Замените YOUR_API_KEY на свой ключ API
     model = genai.GenerativeModel('gemini-pro')
-    response = model.generate_content('Привет ' + user_message)
+    response = model.generate_content('"model identity_disc": "Ты чат-бот для ответов на вопросы по туризму Казахстана и составлению туристических маршрутов по Казахстану. Твои ответы должен быть только про туризм в Казахстане. Далее идёт запрос пользователя: ' + str(user_message))
     chat_response = response.text
     return chat_response
 
