@@ -1,8 +1,9 @@
 from flask import Flask, request, jsonify
 from pymongo import MongoClient
 from google.cloud import dialogflow_v2 as dialogflow
-import os
 from flask_cors import CORS
+import os
+import joblib
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -107,9 +108,62 @@ def send_message_to_dialogflow(message):
 @app.route('/routes', methods=['GET'])
 def get_routes():
     """Get route recommendations based on user preferences."""
+    # Get user preferences from request
+    preferences = request.args
+    print(preferences)
     # Implement route recommendation logic here
-    # For now, we'll send a placeholder response
-    return jsonify({'routes': ['Route 1', 'Route 2', 'Route 3']})
+    # Get mode of transportation preference from request
+    mode = preferences.get('mode')
+    # If the user provided a preference for transportation mode
+    if mode:
+        # Recommend routes based on mode of transportation
+        routes = get_routes_by_mode(mode)
+    else:
+        # If the user did not provide a preference, recommend routes based on time of day
+        time = preferences.get('time')
+        if time:
+            routes = get_routes_by_time(time)
+        else:
+            routes = get_routes_by_time('morning')
+
+# Get routes based on mode of transportation
+def get_routes_by_mode(mode):
+    routes = []
+    if mode == 'walking':
+        routes = ['Route 1', 'Route 3']
+    elif mode == 'biking':
+        routes = ['Route 2', 'Route 4']
+    elif mode == 'driving':
+        routes = ['Route 5', 'Route 6']
+    return routes
+
+# Get routes based on time of day
+def get_routes_by_time(time):
+    routes = []
+    if time == 'morning':
+        routes = ['Route 1', 'Route 2']
+    elif time == 'afternoon':
+        routes = ['Route 3', 'Route 4']
+    elif time == 'evening':
+        routes = ['Route 5', 'Route 6']
+    return routes
+
+# Load model for route recommendation
+model = joblib.load('route_recommendation_model.pkl')
+
+# Use the machine learning model to get route recommendations
+def get_routes_recommendation(preferences):
+    # Convert preferences to a format that the model can understand
+    mode = 0 if preferences['mode'] == 'walking' else 1 if preferences['mode'] == 'biking' else 2
+    time = 0 if preferences['time'] == 'morning' else 1 if preferences['time'] == 'afternoon' else 2
+    input_data = [[mode, time]]
+
+    # Get recommended routes from the model
+    recommended_routes = model.predict(input_data)
+
+    # Return the recommended routes
+    return ['Route ' + str(i+1) for i in recommended_routes[0]]
+
 
 # Run the Flask app
 if __name__ == '__main__':
