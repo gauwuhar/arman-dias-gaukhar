@@ -27,6 +27,25 @@ async function onUserSubmit() {
   document.getElementById('bot-response').innerText = reply;
 }
 
+function sendMessageToBackend(message) {
+  // Замените `5000` на порт, на котором работает ваше Flask-приложение.
+  fetch('http://localhost:5000/process_message', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message: message }),
+  })
+  .then(response => response.json())
+  .then(data => {
+      console.log('Успех:', data);
+      // Обновите интерфейс чата ответом от сервера
+  })
+  .catch((error) => {
+      console.error('Ошибка:', error);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   const sendMessageButton = document.getElementById('send-message-btn');
   const messageInput = document.getElementById('message-input');
@@ -54,3 +73,19 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+// SURPRISE!
+document.addEventListener('keydown', event => {
+  if (event.key === 'x' && event.ctrlKey) {
+    const responses = [
+      '42',
+      '🦄🎉',
+      '👻👻👻👻👻',
+      '🐱🐱🐱🐱🐱',
+      '🎉🎉🎉🎉🎉',
+      '🍺🍺🍺🍺🍺',
+      '🎉🎉🎉🎉🎉🎉',
+      '👻👻👻👻👻👻👻👻',
+    ];
+    document.getElementById('bot-response').innerText = responses[Math.floor(Math.random() * responses.length)];
+  }
+});
