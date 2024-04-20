@@ -3,7 +3,6 @@ import google.generativeai as genai
 
 app = Flask(__name__)
 
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -12,7 +11,7 @@ def index():
 
 @app.route('/interactive_guide', methods=['GET', 'POST'])
 def interactive_guide():
-    chat_response = None
+    chat_response = "Здравствуйте! Чем могу помочь?"
     if request.method == 'POST':
         user_message = {
             'user_message': request.form['input_field'],
