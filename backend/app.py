@@ -3,6 +3,7 @@ from pymongo import MongoClient
 from google.cloud import dialogflow_v2 as dialogflow
 import os
 
+
 # Initialize Flask app
 app = Flask(__name__)
 
@@ -43,6 +44,28 @@ def handle_message():
 
     # Respond with Dialogflow's fulfillment text
     return jsonify({'message': response.fulfillment_text})
+
+@app.route('/api/dialogflow', methods=['POST'])
+def dialogflow_route():
+    data = request.json
+    user_input = data['message']
+
+    # Process the input with Dialogflow or any other logic
+    reply = process_with_dialogflow(user_input)
+
+    # Return the reply in JSON format
+    return jsonify({'reply': reply})
+
+def process_with_dialogflow(message):
+    # Assume we have a function that sends the user message to Dialogflow and gets a response
+    response = send_message_to_dialogflow(message)
+    return response
+
+# Placeholder for Dialogflow interaction
+def send_message_to_dialogflow(message):
+    # Use the Dialogflow client to send a message and return the response
+    # Here we return a static response for example purposes
+    return "This is a response from Dialogflow"
 
 @app.route('/routes', methods=['GET'])
 def get_routes():
