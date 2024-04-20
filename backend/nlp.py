@@ -1,4 +1,4 @@
-import dialogflow_v2 as dialogflow
+import dialogflow_v2 as dialogflow # type: ignore
 from google.api_core.exceptions import InvalidArgument
 
 DIALOGFLOW_PROJECT_ID = 'your-project-id'
