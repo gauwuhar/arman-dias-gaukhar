@@ -1,4 +1,6 @@
+
 import { GoogleGenerativeAI } from "@google/generative-ai";
+
 
 // Access your API key (see "Set up your API key" above)
 const genAI = new GoogleGenerativeAI(API_KEY);
@@ -14,5 +16,4 @@ const response = await result.response;
 const text = response.text();
 console.log(text);
 }
-
 run();
