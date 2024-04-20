@@ -21,7 +21,7 @@ def interactive_guide():
 def get_user_input(user_message):
     genai.configure(api_key='AIzaSyCqfehAC7iwbfBc8jnMRgSt8OIa2Z02kpo')
     model = genai.GenerativeModel('gemini-pro')
-    response = model.generate_content('Напиши мне туристический маршрут для путешествий по Астане' + user_message)
+    response = model.generate_content('Привет' + str(user_message))
     print(response.text)
 
 if __name__ == '__main__':
