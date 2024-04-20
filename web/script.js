@@ -1,3 +1,5 @@
+
+
 async function getResponseFromBackend(userInput) {
     try {
       const response = await fetch('/api/dialogflow', {
@@ -51,3 +53,4 @@ document.addEventListener('DOMContentLoaded', function() {
       .catch(error => console.error('Error:', error));
   });
 });
+

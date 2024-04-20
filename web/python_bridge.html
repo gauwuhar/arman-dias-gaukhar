@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.8.8/brython.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.8.8/brython_stdlib.js"></script>
+
+<button onclick="runPython()">Generate Content</button>
+<textarea id="output"></textarea>
+
+<script type="text/python" id="python-script">
+        import google.generativeai as genai
+
+        genai.configure(api_key='AIzaSyCqfehAC7iwbfBc8jnMRgSt8OIa2Z02kpo')
+
+        model = genai.GenerativeModel('gemini-pro')
+        response = model.generate_content('привет')
+
+        document.getElementById('output').value = response.text
+    </script>
+
+<script>
+  function runPython() {
+    brython(1);
+    eval(__BRYTHON__.py2js(document.getElementById('python-script').textContent, 'test').to_js());
+  }
+</script>
+</body>
+</html>
