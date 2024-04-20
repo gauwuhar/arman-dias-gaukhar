@@ -27,16 +27,12 @@
               import { GoogleGenerativeAI } from "@google/generative-ai";
 
               // Fetch your API_KEY
-              const API_KEY = "...";
+              const API_KEY = "AIzaSyCqfehAC7iwbfBc8jnMRgSt8OIa2Z02kpo";
 
               // Access your API key (see "Set up your API key" above)
               const genAI = new GoogleGenerativeAI(API_KEY);
+              const model = genAI.getGenerativeModel({ model: "gemini-pro"});
 
-              // ...
-
-              const model = genAI.getGenerativeModel({ model: "MODEL_NAME"});
-
-              // ...
           </script>
 
 
