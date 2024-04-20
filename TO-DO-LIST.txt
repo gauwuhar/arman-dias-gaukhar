@@ -1,6 +1,8 @@
 1) наладить связь с гитом - done
 2) проверка - done
-3) frontend 
-4) backend
-5) nlp
-6):)
+3) frontend - done
+4) backend - done 
+5) nlp/ML - done
+6) connect frontend and backend
+7) connect db comewhere for fun
+8) deploy for fun too
