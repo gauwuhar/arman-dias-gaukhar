@@ -10,3 +10,5 @@ def configure_routes(app):
 def process_user_message(message):
     # This function would interface with Dialogflow or an NLP module
     return "Processed message: " + message
+
+

@@ -165,6 +165,30 @@ def get_routes_recommendation(preferences):
     return ['Route ' + str(i+1) for i in recommended_routes[0]]
 
 
+# Get route recommendations based on user preferences   
+@app.route('/routes', methods=['GET'])
+def get_routes():
+    """Get route recommendations based on user preferences."""
+    # Get user preferences from request
+    preferences = request.args
+    print(preferences)
+    # Implement route recommendation logic here
+    # Get mode of transportation preference from request
+    mode = preferences.get('mode')
+    # If the user provided a preference for transportation mode
+    if mode:
+        # Recommend routes based on mode of transportation
+        routes = get_routes_by_mode(mode)
+    else:
+        # If the user did not provide a preference, recommend routes based on time of day
+        time = preferences.get('time')
+        if time:
+            routes = get_routes_by_time(time)
+        else:
+            routes = get_routes_by_time('morning')
+    return jsonify({'routes': routes})
+
 # Run the Flask app
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
+
