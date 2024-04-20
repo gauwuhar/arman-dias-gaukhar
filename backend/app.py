@@ -18,20 +18,43 @@ dialogflow_session_client = dialogflow.SessionsClient()
 PROJECT_ID = 'your_project_id_here'
 
 def detect_intent_texts(text, session_id, language_code='en'):
-    """Detect intent with text input using Dialogflow."""
+    """Detect intent with text input using Dialogflow.
+
+    Args:
+        text (str): The text to classify.
+        session_id (str): The unique identifier of the user's session.
+        language_code (str, optional): The language code of the text. Defaults to 'en'.
+
+    Returns:
+        dialogflow.types.queryresult.QueryResult: The results of the Dialogflow query.
+    """
     session = dialogflow_session_client.session_path(PROJECT_ID, session_id)
+    # The text input.
     text_input = dialogflow.TextInput(text=text, language_code=language_code)
+    # The input for the Dialogflow query.
     query_input = dialogflow.QueryInput(text=text_input)
+    # Send the request to the Dialogflow API.
     response = dialogflow_session_client.detect_intent(session=session, query_input=query_input)
+    # Return the results of the query.
     return response.query_result
+
 
 @app.route('/message', methods=['POST'])
 def handle_message():
-    """Handle incoming messages and respond with Dialogflow intent."""
+    """
+    Handle incoming messages and respond with Dialogflow intent.
+
+    This function receives a JSON object with a message and a session ID
+    from the client, uses the Dialogflow API to get the intent and
+    fulfillment text for the message, and responds with the fulfillment text.
+
+    Additionally, this function saves the conversation to MongoDB for
+    future reference.
+    """
     message = request.json['message']
     session_id = request.json['session_id']
     response = detect_intent_texts(message, session_id)
-    
+
     # Process Dialogflow response
     # Add any additional processing based on the response here
 

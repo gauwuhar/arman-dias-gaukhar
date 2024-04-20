@@ -16,7 +16,12 @@ def send_to_dialogflow(text):
         return response.query_result.fulfillment_text
     except InvalidArgument:
         raise
-
+    
 def process_user_message(message):
     # Sending user message to Dialogflow and getting the response
     return send_to_dialogflow(message)
+
+def process_with_dialogflow(message):
+    # Assume we have a function that sends the user message to Dialogflow and gets a response
+    response = send_to_dialogflow(message)
+    return response
