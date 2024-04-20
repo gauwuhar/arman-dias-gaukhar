@@ -2,10 +2,11 @@ from flask import Flask, request, jsonify
 from pymongo import MongoClient
 from google.cloud import dialogflow_v2 as dialogflow
 import os
-
+from flask_cors import CORS
 
 # Initialize Flask app
 app = Flask(__name__)
+CORS(app)
 
 # Configure the database client and connect to MongoDB
 client = MongoClient('mongodb://localhost:27017/')
@@ -17,20 +18,43 @@ dialogflow_session_client = dialogflow.SessionsClient()
 PROJECT_ID = 'your_project_id_here'
 
 def detect_intent_texts(text, session_id, language_code='en'):
-    """Detect intent with text input using Dialogflow."""
+    """Detect intent with text input using Dialogflow.
+
+    Args:
+        text (str): The text to classify.
+        session_id (str): The unique identifier of the user's session.
+        language_code (str, optional): The language code of the text. Defaults to 'en'.
+
+    Returns:
+        dialogflow.types.queryresult.QueryResult: The results of the Dialogflow query.
+    """
     session = dialogflow_session_client.session_path(PROJECT_ID, session_id)
+    # The text input.
     text_input = dialogflow.TextInput(text=text, language_code=language_code)
+    # The input for the Dialogflow query.
     query_input = dialogflow.QueryInput(text=text_input)
+    # Send the request to the Dialogflow API.
     response = dialogflow_session_client.detect_intent(session=session, query_input=query_input)
+    # Return the results of the query.
     return response.query_result
+
 
 @app.route('/message', methods=['POST'])
 def handle_message():
-    """Handle incoming messages and respond with Dialogflow intent."""
+    """
+    Handle incoming messages and respond with Dialogflow intent.
+
+    This function receives a JSON object with a message and a session ID
+    from the client, uses the Dialogflow API to get the intent and
+    fulfillment text for the message, and responds with the fulfillment text.
+
+    Additionally, this function saves the conversation to MongoDB for
+    future reference.
+    """
     message = request.json['message']
     session_id = request.json['session_id']
     response = detect_intent_texts(message, session_id)
-    
+
     # Process Dialogflow response
     # Add any additional processing based on the response here
 
@@ -44,6 +68,19 @@ def handle_message():
 
     # Respond with Dialogflow's fulfillment text
     return jsonify({'message': response.fulfillment_text})
+
+@app.route('/send_message', methods=['POST'])
+def send_message():
+    user_message = request.json['message']
+    # Process the message with Dialogflow or your NLP model
+    response_message = process_message(user_message)
+    return jsonify({'message': response_message})
+
+def process_message(message):
+    # This function would handle talking to Dialogflow or another service
+    # and generating a response based on the user's message.
+    # Replace this with your actual logic to get a response.
+    return "Response from your chatbot"
 
 @app.route('/api/dialogflow', methods=['POST'])
 def dialogflow_route():
