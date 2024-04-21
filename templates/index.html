@@ -1391,14 +1391,63 @@
                 center: [51.128382, 71.430436],
                 zoom: 17
             });
+            DG.control.location({position: 'bottomright'}).addTo(map);
+            DG.control.scale().addTo(map);
+            DG.control.ruler({position: 'bottomleft'}).addTo(map);
+            DG.control.traffic().addTo(map);
 
             for (var i = 0; i < 100; i++) {
                 coordinates[0] = 51.131749; //khan-shatyr
                 coordinates[1] = 71.404201;
-
-
                 DG.marker(coordinates).addTo(markers);
             }
+            for (var i = 0; i < 100; i++) {
+                coordinates[0] = 51.12854; //bayterek
+                coordinates[1] = 71.430483;
+                DG.marker(coordinates).addTo(markers);
+            }
+            for (var i = 0; i < 100; i++) {
+                coordinates[0] = 51.089923; //nuralem
+                coordinates[1] = 71.415687;
+                DG.marker(coordinates).addTo(markers);
+            }
+            for (var i = 0; i < 100; i++) {
+                coordinates[0] = 51.149548; //atameken
+                coordinates[1] = 71.417381;
+                DG.marker(coordinates).addTo(markers);
+            }
+            for (var i = 0; i < 100; i++) {
+                coordinates[0] = 51.123171; //piramida
+                coordinates[1] = 71.465519;
+                DG.marker(coordinates).addTo(markers);
+            }
+            for (var i = 0; i < 100; i++) {
+                coordinates[0] = 51.117736; //muzey
+                coordinates[1] = 71.470053;
+                DG.marker(coordinates).addTo(markers);
+            }
+            for (var i = 0; i < 100; i++) {
+                coordinates[0] = 51.147088; //keruencity
+                coordinates[1] = 71.415683;
+                DG.marker(coordinates).addTo(markers);
+            }
+            for (var i = 0; i < 100; i++) {
+                coordinates[0] = 51.091994; //alzhir
+                coordinates[1] = 71.179238;
+                DG.marker(coordinates).addTo(markers);
+            }
+            for (var i = 0; i < 100; i++) {
+                coordinates[0] = 51.119984; //dvorec_nezavisimosti
+                coordinates[1] = 71.471666;
+                DG.marker(coordinates).addTo(markers);
+            }
+            for (var i = 0; i < 100; i++) {
+                coordinates[0] = 51.104217; //arka
+                coordinates[1] = 71.429882;
+                DG.marker(coordinates).addTo(markers);
+            }
+
+
 
             document.getElementById('hide').onclick = hideMarkers;
             document.getElementById('show').onclick = showMarkers;
@@ -1412,10 +1461,7 @@
                 markers.removeFrom(map);
             };
 
-            map.locate({setView: true, watch: true})
-                .on('locationfound', function(e) {
-                    DG.marker([e.latitude, e.longitude]).addTo(map);
-                })
+
 
         });
     </script>
