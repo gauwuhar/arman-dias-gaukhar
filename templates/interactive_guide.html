@@ -734,7 +734,7 @@
             </div>
           </li>
           <li>
-            <a href="https://astana.citypass.kz/ru/category/novosti/">
+            <a href="{{ url_for('interactive_guide') }}">
               Интерактивный Гид                            </a>
           </li>
         </ul>
@@ -863,15 +863,15 @@
 
 
 <div class="chat-container">
-  <h1>Чат</h1>
+  <h1 id="guide_text">Интерактивный Гид</h1>
   <div class="chat-history">
     {% for message in chat_history %}
     {% if message[0] == 'user' %}
-    <div class="message user-message">
+    <div class="message user-message font_jura">
       <strong>Вы:</strong> {{ message[1] }}
     </div>
     {% elif message[0] == 'assistant' %}
-    <div class="message assistant-message">
+    <div class="message assistant-message font_jura">
       <strong>Ассистент:</strong> {{ message[1] }}
     </div>
     {% endif %}
@@ -879,7 +879,7 @@
   </div>
   <form method="POST" action="/interactive_guide">
     <input type="text" name="input_field">
-    <input type="submit" value="Отправить">
+    <input class="button" type="submit" value="Отправить">
   </form>
 </div>
 
@@ -989,7 +989,7 @@
               Туристу                            </a>
           </li>
           <li>
-            <a href="https://astana.citypass.kz/ru/category/novosti/">
+            <a href="{{ url_for('interactive_guide') }}">
               Интерактивный Гид                            </a>
           </li>
 
@@ -1388,7 +1388,7 @@
           <div class="header_menu__left--menu">
             <ul class="menu">
               <li>
-                <a href="https://astana.citypass.kz/ru/category/novosti/novosti-citypass/">
+                <a href="{{ url_for('interactive_guide') }}">
                   Интерактивный Гид CityPASS                                    </a>
               </li>
               <li>
@@ -1412,7 +1412,7 @@
                 </div>
                 <div class="header_menu__item--linck">
                   Интерактивный Гид CityPASS                                    </div>
-                <a href="https://astana.citypass.kz/ru/category/novosti/novosti-citypass/">
+                <a href="{{ url_for('interactive_guide') }}">
                   Подробнее                                    </a>
               </div>
             </div>
@@ -1615,7 +1615,7 @@
 
   <!-- 11111 -->
 
-  <footer>
+  <footer class="font_jura">
     <div class="footer__bg">
       <div class="container">
 
