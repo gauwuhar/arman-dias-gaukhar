@@ -1,2 +1,1 @@
-# citychat-gds
-GDS Hackathon 2024
+Запускать app.py
