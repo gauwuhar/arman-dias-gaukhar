@@ -204,10 +204,7 @@
     display: flex;
     align-items: center;
   }
-  .chat-container {
-    max-height: 400px;
-    overflow-y: scroll;
-  }
+
 
   .message {
     margin-bottom: 10px;
@@ -223,10 +220,22 @@
     color: green;
   }
   .chat-container {
+    overflow-y: scroll;
+    opacity: 1;
     width: 400px;
     margin: 0 auto;
+    position: fixed;
+    right: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
-
+  .chat-history {
+    max-height: 400px;
+    overflow-y: auto;
+    opacity: 1;
+  }
   .message {
     margin-bottom: 10px;
     padding: 5px;
@@ -863,7 +872,7 @@
 
 
 <div class="chat-container">
-  <h1>Чат</h1>
+  <h1>Connor</h1>
   <div class="chat-history">
     {% for message in chat_history %}
     {% if message[0] == 'user' %}
@@ -872,7 +881,7 @@
     </div>
     {% elif message[0] == 'assistant' %}
     <div class="message assistant-message">
-      <strong>Ассистент:</strong> {{ message[1] }}
+      <strong>Коннор:</strong> {{ message[1] }}
     </div>
     {% endif %}
     {% endfor %}
