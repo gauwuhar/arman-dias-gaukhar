@@ -1396,56 +1396,17 @@
             DG.control.ruler({position: 'bottomleft'}).addTo(map);
             DG.control.traffic().addTo(map);
 
-            for (var i = 0; i < 100; i++) {
-                coordinates[0] = 51.131749; //khan-shatyr
-                coordinates[1] = 71.404201;
-                DG.marker(coordinates).addTo(markers);
-            }
-            for (var i = 0; i < 100; i++) {
-                coordinates[0] = 51.12854; //bayterek
-                coordinates[1] = 71.430483;
-                DG.marker(coordinates).addTo(markers);
-            }
-            for (var i = 0; i < 100; i++) {
-                coordinates[0] = 51.089923; //nuralem
-                coordinates[1] = 71.415687;
-                DG.marker(coordinates).addTo(markers);
-            }
-            for (var i = 0; i < 100; i++) {
-                coordinates[0] = 51.149548; //atameken
-                coordinates[1] = 71.417381;
-                DG.marker(coordinates).addTo(markers);
-            }
-            for (var i = 0; i < 100; i++) {
-                coordinates[0] = 51.123171; //piramida
-                coordinates[1] = 71.465519;
-                DG.marker(coordinates).addTo(markers);
-            }
-            for (var i = 0; i < 100; i++) {
-                coordinates[0] = 51.117736; //muzey
-                coordinates[1] = 71.470053;
-                DG.marker(coordinates).addTo(markers);
-            }
-            for (var i = 0; i < 100; i++) {
-                coordinates[0] = 51.147088; //keruencity
-                coordinates[1] = 71.415683;
-                DG.marker(coordinates).addTo(markers);
-            }
-            for (var i = 0; i < 100; i++) {
-                coordinates[0] = 51.091994; //alzhir
-                coordinates[1] = 71.179238;
-                DG.marker(coordinates).addTo(markers);
-            }
-            for (var i = 0; i < 100; i++) {
-                coordinates[0] = 51.119984; //dvorec_nezavisimosti
-                coordinates[1] = 71.471666;
-                DG.marker(coordinates).addTo(markers);
-            }
-            for (var i = 0; i < 100; i++) {
-                coordinates[0] = 51.104217; //arka
-                coordinates[1] = 71.429882;
-                DG.marker(coordinates).addTo(markers);
-            }
+            DG.marker([51.131749, 71.404201]).addTo(markers).bindPopup('Время работы: с 10:00 до 22:00'); //khan-shatyr
+            DG.marker([51.128413, 71.430415]).addTo(markers).bindPopup('Время работы: с 09:00 до 18:00'); //bayterek
+            DG.marker([51.089923, 71.415687]).addTo(markers).bindPopup('Время работы: с 10:00 до 21:00'); //nuralem
+            DG.marker([51.149548, 71.417381]).addTo(markers).bindPopup('Время работы: с 10:00 до 22:00'); //atameken
+            DG.marker([51.123171, 71.465519]).addTo(markers).bindPopup('Время работы: с 10:00 до 18:00'); //piramida
+            DG.marker([51.117736, 71.470053]).addTo(markers).bindPopup('Время работы: с 10:00 до 18:00'); //muzey
+            DG.marker([51.147088, 71.415683]).addTo(markers).bindPopup('Время работы: с 10:00 до 00:00'); //keruencity
+            DG.marker([51.091994, 71.179238]).addTo(markers).bindPopup('Время работы: с 10:00 до 22:00'); //alzhir
+            DG.marker([51.119984, 71.471666]).addTo(markers).bindPopup('Время работы: с 10:00 до 22:00'); //dvorec_nezavisimosti
+            DG.marker([51.104217, 71.429882]).addTo(markers).bindPopup('Время работы: с 10:00 до 22:00'); //arka
+
 
 
 
