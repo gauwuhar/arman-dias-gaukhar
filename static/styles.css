@@ -1,6 +1,9 @@
 body{
 	font-family: "Jura", sans-serif;
 }
+.user_input_field{
+	margin-left: 5px;
+}
 .button {
 	display: inline-block;
 	border-radius: 4px;
